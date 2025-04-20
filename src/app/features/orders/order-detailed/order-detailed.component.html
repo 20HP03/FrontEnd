@@ -1,0 +1,95 @@
+@if (order) {
+<mat-card class="bg-white py-8 shadow-md max-w-screen-lg mx-auto">
+    <div class="px-4 w-full">
+        <div class="relative flex items-center h-12">
+            <button mat-icon-button routerLink="/orders" class="absolute left-0">
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+            <h2 class="text-2xl font-semibold w-full text-center">Order Summary For Order #{{ order.id }}</h2>
+          </div>
+        <div class="mt-8 py-3 border-t border-gray-200 flex justify-center gap-32">
+            <div class="space-y-2">
+                <h4 class="text-lg font-semibold">Billing and Delivery Information</h4>
+                <dl>
+                    <dt class="font-medium">Shipping Address</dt>
+                    <dd class="mt-1 font-light">{{order.shippingAddress | address}}</dd>
+                </dl>
+                <dl>
+                    <dt class="font-medium">Payment Information</dt>
+                    <dd class="mt-1 font-light">{{order.paymentSummary | paymentCard}}</dd>
+                </dl>
+            </div>
+            <div class="space-y-2">
+                <h4 class="text-lg font-semibold">Order Details Information</h4>
+                <dl>
+                    <dt class="font-medium">Email Address</dt>
+                    <dd class="mt-1 font-light">{{order.buyerEmail}}</dd>
+                </dl>
+                <dl>
+                    <dt class="font-medium">Order Status</dt>
+                    <dd class="mt-1 font-light">{{order.status}}</dd>
+                </dl>
+                <dl>
+                    <dt class="font-medium">Order Date</dt>
+                    <dd class="mt-1 font-light">{{order.orderDate | date: 'medium'}}</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class="border-y border-gray-200">
+                <table class="w-full text-center">
+                    <tbody class="divide-y divide-gray-200">
+                        @for (item of order.orderItems; track item.productId) {
+                        <tr>
+                            <td class="py-4">
+                                <div class="flex items-center gap-4">
+                                    <img src="{{item.pictureUrl}}" alt="Product image" class="h-12 w-8">
+                                    <span>{{item.productName}}</span>
+                                </div>
+                            </td>
+                            <td class="p-4">x{{item.quantity}}</td>
+                            <td class="p-4 text-right">{{item.price | currency}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="space-y-4 rounded-lg border-y border-gray-200 p-4 bg-white">
+            <p class="text-xl font-semibold">Order Summary</p>
+            <div class="space-y-4">
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-500">Subtotal</span>
+                        <span class="font-medium text-gray-900">
+                            {{order.subtotal | currency}}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-500">Discount</span>
+                        <span class="font-medium text-green-400">
+                            -$0.00
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-medium text-gray-500">Delivery Fee</span>
+                        <span class="font-medium text-gray-900">
+                            {{order.shippingPrice | currency}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between border-t border-gray-200 pt-2">
+                    <span class="font-medium text-gray-500">Total</span>
+                    <span class="font-medium text-gray-900">
+                        {{order.total | currency}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</mat-card>
+}

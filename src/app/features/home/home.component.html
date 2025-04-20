@@ -1,0 +1,36 @@
+<div class="max-w-screen-2xl mx-auto px-4 mt-20">
+  <div
+    class="flex flex-col items-center text-center bg-gradient-to-br from-indigo-100 via-white to-blue-100 p-16 rounded-3xl shadow-2xl">
+    <h1 class="text-5xl font-extrabold text-gray-800 mb-6">📖 Welcome to Our Bookstore</h1>
+    <p class="text-lg text-gray-600 mb-8 max-w-2xl">
+      Dive into a world of magic, mystery, and adventure. Whether you're looking for fantasy epics, gripping
+      thrillers, or timeless classics — we've got something special for every reader.
+    </p>
+    <a href="#top-sellers" routerLink="/shop"
+      class="bg-blue-600 text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-blue-700 transition duration-300">
+      Shop Now
+    </a>
+  </div>
+</div>
+
+<div class="max-w-screen-2xl mx-auto px-4 mt-32">
+  <div
+    class="flex flex-col items-center py-16 justify-center mt-20 bg-gradient-to-br from-purple-100 via-white to-blue-100 rounded-2xl shadow-2xl">
+
+    <h2 class="text-4xl font-bold text-gray-800 mb-12">🔥 Top Sellers</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+
+      <div *ngFor="let product of topSellers"
+        class="relative group overflow-hidden rounded-2xl shadow-lg transform transition duration-300 hover:scale-105">
+        <a [routerLink]="['/shop', product.id]">
+          <img [src]="product.pictureUrl" [alt]="product.name" class="w-full h-96 object-cover">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+            <h3 class="text-white text-lg font-semibold">{{ product.name }}</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
